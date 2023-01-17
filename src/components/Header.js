@@ -6,8 +6,11 @@ function Header() {
   return (
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand>Make-Up</Navbar.Brand>
-      <Link to="/">Products</Link>
-      <Link to="/about">About</Link>
+      {isAuthenticated && <link to="/">Home</link>}
+      {isAuthenticated && <link to="/productByBrand">Products</link>}
+      {isAuthenticated && <link to="/profile">Profile</link>}
+      {isAuthenticated && <link to="/about">About</link>}
+      {isAuthenticated ? <LogoutButton /> : <LoginButton />}
     </Navbar>
   );
 }
