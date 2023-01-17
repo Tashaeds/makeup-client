@@ -1,0 +1,26 @@
+import { useEffect, useState } from "react";
+import Item from "./Item";
+import axios from "axios";
+
+function Products() {
+  const [results, setResults] = useState([]);
+  const [serverLink, setServerLink] = useState(process.env.REACT_APP_SERVER);
+  const [showItems, setShowItems] = useState(false);
+
+  useEffect(() => {
+    const getProducts = async () => {
+      let result = await axios.get(`${serverLink}/MakeUpapi`);
+      console.log("useEffect Product", result.data);
+      setResults(result.data);
+      setShowItems(true);
+    };
+    getProducts();
+  }, []);
+  return (
+
+        {showItems &&
+          results.map((item, index) => <Item key={index} item={item} />)}
+    );
+}
+
+export default Products;
